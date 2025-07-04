@@ -1,11 +1,10 @@
 package com.bank.publicinfo.controller;
 
+import com.bank.publicinfo.dto.BranchDto;
 import com.bank.publicinfo.service.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/branch")
@@ -20,8 +19,11 @@ public class BranchController {
     }
 
     @GetMapping("/create")
-    public ResponseEntity<String> createBranch() {
-        branchService.create(null);
+    public ResponseEntity<String> createBranch(@RequestParam("address") String address, @RequestParam("city") String city) {
+        BranchDto branchDto = new BranchDto();
+        branchDto.setAddress(address);
+        branchDto.setCity(city);
+        branchService.create(branchDto);
         return ResponseEntity.ok("Creation endpoint");
     }
 }

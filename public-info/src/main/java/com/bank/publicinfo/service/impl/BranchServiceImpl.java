@@ -24,6 +24,8 @@ public class BranchServiceImpl implements BranchService {
     @Override
     public BranchDto create(BranchDto branchDto) {
         Branch branch = new Branch();
+        branch.setAddress(branchDto.getAddress());
+        branch.setCity(branchDto.getCity());
         branchRepository.save(branch);
         return null;
     }
